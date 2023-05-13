@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>混合模式效果演示</title>
+	<style>
+		body {
+			background-color: #1e1e1e;
+			color:#ccc;
+		}
+		.blend-mode {
+			font-size: 20px;
+			margin: 20px auto;		
+			text-align: center;
+			color: #2B298F;
+			background-color: transparent;
+		}
+		.color-picker {
+			margin: 10px;
+		}
+
+		.menu {
+   			background-color: #2B298F; /* 使用text-color-picker的颜色 */
+    		color: rgba(255, 255, 255, 0.7);
+    		border-radius: 10px; /* 圆角半径为10像素 */
+    		padding: 10px 20px; /* 上下内边距10像素，左右内边距20像素 */
+  			/* 其他样式 */
+  			display: flex;
+  			justify-content: center;
+  			align-items: center;
+  			width: fit-content;
+  			margin: 20px auto 20px auto;
+			height: 32px; /* 设置一个固定的行高 */
+			line-height: 32px; /* 与 height 值相同 */
+  		}
+	</style>
+</head>
+<body>
+	
+	<div>
+		<label for="text-color-picker">选择文字颜色：</label>
+		<input type="color" id="text-color-picker" value="#2B298F" class="color-picker">
+		<label for="bg-color-picker">选择背景颜色：</label>
+		<input type="color" id="bg-color-picker" value="#1e1e1e" class="color-picker">
+	</div>
+	<div>
+		<label for="text-size-slider">文字大小：</label>
+		<input type="range" min="9" max="24" value="20" id="text-size-slider">
+	  </div>
+	  <div>
+		<label for="line-height-slider">行高：</label>
+		<input type="range" min="0.1" max="1.5" step="0.1" value="1" id="line-height-slider">
+	  </div>
+
+	<div class="menu" id="menu-highlight"><span>选中菜单</span></div>
+	<div class="blend-mode" id="normal-mode">normal</div>
+	<div class="blend-mode" id="screen-mode">screen</div>
+	<div class="blend-mode" id="lighten-mode">lighten</div>
+	<div class="blend-mode" id="hard-light-mode">hard-light</div>
+	<div class="blend-mode" id="soft-light-mode">soft-light</div>
+	<div class="blend-mode" id="difference-mode">difference</div>
+	<div class="blend-mode" id="exclusion-mode">exclusion</div>
+	<div class="blend-mode" id="initial-mode">initial</div>
+	<div class="blend-mode" id="inherit-mode">inherit</div>
+	<div class="blend-mode" id="unset-mode">unset</div>
+	<!--
+	<div class="blend-mode" id="multiply-mode">multiply</div>
+	<div class="blend-mode" id="overlay-mode">overlay</div>
+	<div class="blend-mode" id="darken-mode">darken</div>
+	<div class="blend-mode" id="color-dodge-mode">color-dodge</div>
+	<div class="blend-mode" id="color-burn-mode">color-burn</div>
+	<div class="blend-mode" id="hue-mode">hue</div>
+	<div class="blend-mode" id="saturation-mode">saturation</div>
+	<div class="blend-mode" id="color-mode">color</div>
+	<div class="blend-mode" id="luminosity-mode">luminosity</div>
+	-->
+
+
+	<script>
+		const blendModes = document.querySelectorAll('.blend-mode');
+		const textColorPicker = document.getElementById('text-color-picker');
+		const bgColorPicker = document.getElementById('bg-color-picker');
+		<!-- -->
+		const menuHighlight = document.getElementById('menu-highlight');
+		<!-- -->
+		textColorPicker.addEventListener('input', applyTextColor);
+		bgColorPicker.addEventListener('input', applyBgColor);
+		for (let i = 0; i < blendModes.length; i++) {
+			const mode = blendModes[i].id.split('-')[0];
+			blendModes[i].style.mixBlendMode = mode;
+		}
+		function applyTextColor() {
+			const color = textColorPicker.value;
+			for (let i = 0; i < blendModes.length; i++) {
+				blendModes[i].style.color = color;
+				<!-- -->
+				menuHighlight.style.backgroundColor = color;
+				<!-- -->
+			}
+		}
+		function applyBgColor() {
+			const color = bgColorPicker.value;
+			document.body.style.backgroundColor = color;
+		}
+	</script>
+	<script>
+		const textSizeSlider = document.getElementById('text-size-slider');
+const lineHeightSlider = document.getElementById('line-height-slider');
+
+textSizeSlider.addEventListener('input', applyTextSize);
+lineHeightSlider.addEventListener('input', applyLineHeight);
+
+function applyTextSize() {
+  const size = textSizeSlider.value + 'px';
+  for (let i = 0; i < blendModes.length; i++) {
+    blendModes[i].style.fontSize = size;
+  }
+}
+
+function applyLineHeight() {
+  const height = lineHeightSlider.value;
+  document.body.style.lineHeight = height;
+}
+	</script>
+</body>
+</html>
