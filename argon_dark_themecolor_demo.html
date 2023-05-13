@@ -4,10 +4,12 @@
 	<meta charset="utf-8">
 	<title>混合模式效果演示</title>
 	<style>
+		/* 页面背景和文本颜色样式 */
 		body {
 			background-color: #1e1e1e;
 			color:#ccc;
 		}
+		/* blend-mode 样式 */
 		.blend-mode {
 			font-size: 20px;
 			margin: 20px auto;		
@@ -15,10 +17,11 @@
 			color: #2B298F;
 			background-color: transparent;
 		}
+		/* color-picker 样式 */
 		.color-picker {
 			margin: 10px;
 		}
-
+		/* menu 样式 */
 		.menu {
    			background-color: #2B298F; /* 使用text-color-picker的颜色 */
     		color: rgba(255, 255, 255, 0.7);
@@ -80,9 +83,7 @@
 		const blendModes = document.querySelectorAll('.blend-mode');
 		const textColorPicker = document.getElementById('text-color-picker');
 		const bgColorPicker = document.getElementById('bg-color-picker');
-		<!-- -->
-		const menuHighlight = document.getElementById('menu-highlight');
-		<!-- -->
+		const menuHighlight = document.getElementById('menu-highlight');//menu背景色
 		textColorPicker.addEventListener('input', applyTextColor);
 		bgColorPicker.addEventListener('input', applyBgColor);
 		for (let i = 0; i < blendModes.length; i++) {
@@ -93,9 +94,7 @@
 			const color = textColorPicker.value;
 			for (let i = 0; i < blendModes.length; i++) {
 				blendModes[i].style.color = color;
-				<!-- -->
-				menuHighlight.style.backgroundColor = color;
-				<!-- -->
+				menuHighlight.style.backgroundColor = color;//menu背景色
 			}
 		}
 		function applyBgColor() {
